@@ -1,4 +1,6 @@
 ﻿@page "/FormularioEmpresas"
+@using BolsaTrabajoSMA.Shared.Models;
+@inject HttpClient client
 
 <PageTitle>Registra la vacante</PageTitle>
 
@@ -76,10 +78,10 @@
         <div class="col">
             <label for="contractSel">Indique el tipo de contratación:</label>
             <select class="form-select" id="contractSel" aria-label="Default select example">
-                <option disabled selected>Seleccione una opción</option>
+@*                 <option disabled selected>Seleccione una opción</option>
                 <option value="Hon">Honorarios</option>
                 <option value="Temp">Temporal</option>
-                <option value="Indef">Tiempo Indefinido</option>
+                <option value="Indef">Tiempo Indefinido</option> *@
             </select>
         </div>
     </div>
@@ -160,6 +162,36 @@
 
 
 @code {
+    // List<NombrePuesto> nombrepuestos = new List<NombrePuesto>();
+    List<TipoContratacion> tipocontratacion = new List<TipoContratacion>();
+    List<Modalidad> modalidades = new List<Modalidad>();
+    List<Escolaridad> escolaridades = new List<Escolaridad>();
+    private UserInfo userInfo = new UserInfo();
+    private NombrePuesto nombrePuestov = new NombrePuesto();
+    private Responsabilidades responsabilidadesv = new Responsabilidades();
+    private Habilidades habilidadesv = new Habilidades();
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        // nombrepuestos = await client.GetFromJsonAsync<List<NombrePuesto>>("api/Catalogos/NombrePuesto");
+        tipocontratacion = await client.GetFromJsonAsync<List<TipoContratacion>>("api/Catalogos/TipoContratacion");
+        modalidades = await client.GetFromJsonAsync<List<Modalidad>>("api/Catalogos/Modalidad");
+        escolaridades = await client.GetFromJsonAsync<List<Escolaridad>>("api/Catalogos/REscolaridad");
+
+
+    }
+
+    private async Task CrearUsuario()
+    {
+        var response = await client.PostAsJsonAsync("api/Cuentas/NombrePuesto", userInfo);
+        var responseR = await client.PostAsJsonAsync("api/Cuentas/NombrePuesto", responsabilidadesv);
+        var responseH = await client.PostAsJsonAsync("api/Cuentas/Habilidad", habilidadesv);
+
+    }
 
 }
 

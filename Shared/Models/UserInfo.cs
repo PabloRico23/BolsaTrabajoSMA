@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace BolsaTrabajoSMA.Shared.Models
 {
-    public class TipoContratacion
+    public class UserInfo
     {
-        public int Id { get; set; }
-        public string Tipo { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }
+
