@@ -74,17 +74,22 @@
     </div>
 
     <!--Tipo de Contratación-->
+    @if(tipocontratacion.Count() > 0)
+    {
     <div class="row mt-3">
         <div class="col">
             <label for="contractSel">Indique el tipo de contratación:</label>
             <select class="form-select" id="contractSel" aria-label="Default select example">
-@*                 <option disabled selected>Seleccione una opción</option>
-                <option value="Hon">Honorarios</option>
-                <option value="Temp">Temporal</option>
-                <option value="Indef">Tiempo Indefinido</option> *@
+                <option disabled selected>Seleccione una opción</option>
+                    @foreach (var tc in tipocontratacion)
+                {
+                    <option value="@tc.Id">@tc.Tipo</option>                    
+                }
+
             </select>
         </div>
     </div>
+    }
 
 
     <!--Modalidad-->
@@ -179,8 +184,8 @@
 
         // nombrepuestos = await client.GetFromJsonAsync<List<NombrePuesto>>("api/Catalogos/NombrePuesto");
         tipocontratacion = await client.GetFromJsonAsync<List<TipoContratacion>>("api/Catalogos/TipoContratacion");
-        modalidades = await client.GetFromJsonAsync<List<Modalidad>>("api/Catalogos/Modalidad");
-        escolaridades = await client.GetFromJsonAsync<List<Escolaridad>>("api/Catalogos/REscolaridad");
+        // modalidades = await client.GetFromJsonAsync<List<Modalidad>>("api/Catalogos/Modalidad");
+        // escolaridades = await client.GetFromJsonAsync<List<Escolaridad>>("api/Catalogos/REscolaridad");
 
 
     }

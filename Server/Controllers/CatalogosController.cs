@@ -24,11 +24,11 @@ namespace BolsaSMA.Server.Controllers
         }
 
 
-        [HttpGet("tipocontratacion")]
+        [HttpGet("TipoContratacion")]
         public async Task<List<TipoContratacion>> TipoContrataciones()
         {
             List<TipoContratacion> tipocontrataciones = new List<TipoContratacion>();
-            //tipocontrataciones = await context.TipoContrtaciones.ToListAsync();
+            tipocontrataciones = await context.tipoContrataciones.ToListAsync();
 
             return tipocontrataciones;
         }
